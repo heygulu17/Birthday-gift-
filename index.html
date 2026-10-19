@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday 🎂</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            background: linear-gradient(
+                135deg, #1a0633, #601080, #e84393
+            );
+            overflow-x: hidden;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 500px;
+            padding: 35px 22px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(12px);
+            animation: appear 1s ease;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 8vw, 3rem);
+            color: #ffe082;
+            margin-bottom: 15px;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #ff80ab; }
+            to { text-shadow: 0 0 25px #ff80ab; }
+        }
+
+        .cake {
+            font-size: 100px;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        h2 {
+            color: #ffd6eb;
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            max-width: 250px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 30px;
+            background: #ffe082;
+            color: #401052;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #ffffff;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #ffe082;
+        }
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 10px;
+            height: 14px;
+            pointer-events: none;
+            z-index: 10;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .card { padding: 28px 16px; }
+            .cake { font-size: 80px; }
+            p { font-size: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <h1>🎉 Happy Birthday! 🎉</h1>
+
+        <div class="cake">🎂</div>
+
+        <h2 id="name">Dear Best Friend 💖</h2>
+
+        <p>
+            May your birthday be filled with happiness,
+            love, laughter, and beautiful memories.
+            May all your dreams come true!
+        </p>
+
+        <p>
+            Keep smiling, keep shining, and enjoy
+            every moment of your special day. ✨
+        </p>
+
+        <button onclick="celebrate()">
+            🎊 Celebrate Birthday!
+        </button>
+
+        <div id="message"></div>
+    </main>
+
+    <script>
+        const colors = [
+            "#ff4081", "#ffeb3b", "#00e5ff",
+            "#76ff03", "#ffffff", "#ff9800"
+        ];
+
+        function celebrate() {
+            document.getElementById("message").textContent =
+                "🎉 Happy Birthday! Have an amazing day! 💖";
+
+            // Create falling confetti
+            for (let i = 0; i < 150; i++) {
+                const piece = document.createElement("div");
+
+                piece.className = "confetti";
+                piece.style.left = Math.random() * 100 + "vw";
+                piece.style.backgroundColor =
+                    colors[Math.floor(Math.random() * colors.length)];
+
+                piece.style.animationDuration =
+                    (2 + Math.random() * 3) + "s";
+
+                piece.style.animationDelay =
+                    Math.random() * 0.8 + "s";
+
+                piece.style.borderRadius =
+                    Math.random() > 0.5 ? "50%" : "2px";
+
+                document.body.appendChild(piece);
+
+                piece.addEventListener("animationend", () => {
+                    piece.remove();
+                });
+            }
+        }
+
+        // Start with a small celebration
+        window.addEventListener("load", celebrate);
+    </script>
+</body>
+</html>
